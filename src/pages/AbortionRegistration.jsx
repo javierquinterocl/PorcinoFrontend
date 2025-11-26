@@ -321,13 +321,13 @@ export default function AbortionRegistration() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-6">
+    <>
       {isLoadingData ? (
         <div className="flex justify-center items-center h-96">
           <p className="text-lg">Cargando datos...</p>
         </div>
       ) : (
-        <div className="pb-6">
+        <div>
           <div className="mb-6">
             <Button
               variant="ghost"
@@ -756,7 +756,7 @@ export default function AbortionRegistration() {
           </form>
         </div>
       )}
-    </div>
+    </>
   );
 }
 

@@ -446,8 +446,7 @@ export default function SowRegistration() {
 
   // Formulario de registro de cerda
   return (
-    <div className="bg-gradient-to-br from-green-50 to-blue-50 min-h-screen p-6">
-      <div className="max-w-6xl mx-auto pb-6">
+    <div className="max-w-6xl mx-auto".
         <Button
           variant="ghost"
           onClick={() => isEditMode ? navigate("/sows/list") : setAnimalType("")}
@@ -1035,7 +1034,6 @@ export default function SowRegistration() {
             )}
           </CardContent>
         </Card>
-      </div>
     </div>
   );
 }

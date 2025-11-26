@@ -375,8 +375,7 @@ export default function BoarRegistration() {
 
   // Renderizar formulario
   return (
-    <div className="bg-gradient-to-br from-green-50 to-blue-50 min-h-screen p-6">
-      <div className="max-w-6xl mx-auto pb-6">
+    <div className="max-w-6xl mx-auto">
         <Button
           variant="ghost"
           onClick={() => navigate("/sows/list")}
@@ -846,7 +845,6 @@ export default function BoarRegistration() {
             )}
           </CardContent>
         </Card>
-      </div>
     </div>
   );
 }

@@ -305,8 +305,7 @@ export default function PigletRegistration() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-6">
-      <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="flex items-center gap-4 mb-6">
           <Button
@@ -781,7 +780,6 @@ export default function PigletRegistration() {
             </Button>
           </div>
         </form>
-      </div>
     </div>
   );
 }
