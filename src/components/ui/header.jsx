@@ -164,7 +164,7 @@ export function Header({ toggleSidebar }) {
           </div>
         </div>
 
-        <div className="hidden md:flex items-center gap-4">
+        <div className="flex items-center gap-2 md:gap-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon" className="relative text-white hover:bg-[#5a6a3a] hover:text-white">
@@ -177,7 +177,7 @@ export function Header({ toggleSidebar }) {
                 <span className="sr-only">Notificaciones</span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-[380px] bg-white max-h-[500px] overflow-y-auto">
+            <DropdownMenuContent align="end" className="w-[320px] md:w-[380px] bg-white max-h-[500px] overflow-y-auto">
               <div className="px-2 py-1.5">
                 <div className="flex items-center justify-between">
                   <DropdownMenuLabel className="text-gray-900 p-0">
@@ -298,41 +298,41 @@ export function Header({ toggleSidebar }) {
               )}
             </DropdownMenuContent>
           </DropdownMenu>
-        </div>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="ghost"
-              className="relative flex items-center gap-2 text-white hover:bg-[#5a6a3a] hover:text-white"
-            >
-              <Avatar className="h-8 w-8">
-                {user?.profile_image || user?.profileImage ? (
-                  <AvatarImage src={user.profile_image || user.profileImage} alt={getFullName()} />
-                ) : (
-                  <AvatarFallback className="bg-[#5a6a3a] text-white">{getInitials()}</AvatarFallback>
-                )}
-              </Avatar>
-              <span className="hidden md:inline">{getFullName()}</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="bg-white">
-            <DropdownMenuLabel className="text-gray-900">Mi Cuenta</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem asChild className="focus:bg-gray-100">
-              <Link to="/profile" className="cursor-pointer">
-                <User className="mr-2 h-4 w-4" />
-                <span>Mi Cuenta</span>
-              </Link>
-            </DropdownMenuItem>
-           
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleLogout} className="focus:bg-gray-100 cursor-pointer">
-              <LogOut className="mr-2 h-4 w-4" />
-              <span>Cerrar Sesión</span>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="ghost"
+                className="relative flex items-center gap-2 text-white hover:bg-[#5a6a3a] hover:text-white"
+              >
+                <Avatar className="h-8 w-8">
+                  {user?.profile_image || user?.profileImage ? (
+                    <AvatarImage src={user.profile_image || user.profileImage} alt={getFullName()} />
+                  ) : (
+                    <AvatarFallback className="bg-[#5a6a3a] text-white">{getInitials()}</AvatarFallback>
+                  )}
+                </Avatar>
+                <span className="hidden md:inline">{getFullName()}</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="bg-white">
+              <DropdownMenuLabel className="text-gray-900">Mi Cuenta</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild className="focus:bg-gray-100">
+                <Link to="/profile" className="cursor-pointer">
+                  <User className="mr-2 h-4 w-4" />
+                  <span>Mi Cuenta</span>
+                </Link>
+              </DropdownMenuItem>
+             
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={handleLogout} className="focus:bg-gray-100 cursor-pointer">
+                <LogOut className="mr-2 h-4 w-4" />
+                <span>Cerrar Sesión</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
     </header>
   )
