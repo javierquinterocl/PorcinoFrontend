@@ -57,14 +57,7 @@ function SidebarContent({ pathname, collapsed, openMenus, toggleMenu, handleNavi
         onNavigate={handleNavigate}
       />
 
-      <NavItem
-        icon={<Users className="h-5 w-5" />}
-        label="Usuarios"
-        href="/users"
-        isActive={pathname === "/users"}
-        collapsed={collapsed}
-        onNavigate={handleNavigate}
-      />
+      
 
       <NavItem
         icon={<Calendar className="h-5 w-5" />}
