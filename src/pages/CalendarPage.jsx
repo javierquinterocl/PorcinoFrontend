@@ -8,9 +8,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
-import { Calendar, ChevronLeft, ChevronRight, Plus, Download, Upload } from "lucide-react";
+import { Calendar, ChevronLeft, ChevronRight, Plus, Download, Upload, User } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { pregnancyService, heatService, calendarEventService, serviceService } from "@/services/api";
+import { pregnancyService, heatService, calendarEventService, serviceService, sowService } from "@/services/api";
 
 export default function CalendarPage() {
   const navigate = useNavigate();
@@ -26,6 +26,7 @@ export default function CalendarPage() {
   const [editingEvent, setEditingEvent] = useState(null);
   const [customEvents, setCustomEvents] = useState([]);
   const [deleteDialog, setDeleteDialog] = useState({ open: false, eventId: null });
+  const [sows, setSows] = useState([]);
   const [eventForm, setEventForm] = useState({
     title: "",
     event_date: "",
@@ -34,7 +35,8 @@ export default function CalendarPage() {
     description: "",
     notes: "",
     status: "pending",
-    reminder_days: 0
+    reminder_days: 0,
+    sow_id: null
   });
   
   // Cargar eventos desde el backend
@@ -66,6 +68,11 @@ export default function CalendarPage() {
             hour12: false
           });
           displayTitle = `${timeStr} - ${event.title}`;
+        }
+        
+        // Agregar información de la cerda si está asociada
+        if (event.sow_ear_tag) {
+          displayTitle += ` (${event.sow_ear_tag})`;
         }
         
         calculatedEvents.push({
@@ -327,15 +334,23 @@ export default function CalendarPage() {
     setSelectedDate(new Date(selectedYear, selectedMonth, day));
     const dayEvents = getEventsForDay(day);
     if (dayEvents.length > 0) {
-      // Mostrar detalles de eventos
+      // Construir descripción detallada de eventos
+      const eventDetails = dayEvents.map(e => {
+        let details = e.title;
+        if (e.data?.created_by_name) {
+          details += ` (Creado por: ${e.data.created_by_name})`;
+        }
+        return details;
+      }).join('\n');
+      
       toast({
         title: `Eventos del ${day}/${selectedMonth + 1}/${selectedYear}`,
-        description: dayEvents.map(e => e.title).join('\n'),
+        description: eventDetails,
       });
     }
   };
 
-  const handleCreateEvent = () => {
+  const handleCreateEvent = async () => {
     setEditingEvent(null);
     setEventForm({
       title: "",
@@ -345,12 +360,24 @@ export default function CalendarPage() {
       description: "",
       notes: "",
       status: "pending",
-      reminder_days: 0
+      reminder_days: 0,
+      sow_id: null
     });
+    // Cargar lista de cerdas
+    await loadSows();
     setIsEventDialogOpen(true);
   };
 
-  const handleEditEvent = (event) => {
+  const loadSows = async () => {
+    try {
+      const sowsData = await sowService.getSowsSimplified();
+      setSows(sowsData);
+    } catch (error) {
+      console.error("Error cargando cerdas:", error);
+    }
+  };
+
+  const handleEditEvent = async (event) => {
     setEditingEvent(event.data);
     // Extraer la hora si existe en event_date (formato ISO)
     let eventTime = "";
@@ -367,8 +394,11 @@ export default function CalendarPage() {
       description: event.data.description || "",
       notes: event.data.notes || "",
       status: event.data.status || "pending",
-      reminder_days: event.data.reminder_days || 0
+      reminder_days: event.data.reminder_days || 0,
+      sow_id: event.data.sow_id || null
     });
+    // Cargar lista de cerdas
+    await loadSows();
     setIsEventDialogOpen(true);
   };
 
@@ -653,6 +683,25 @@ export default function CalendarPage() {
                 ? "Modifica los detalles del evento personalizado" 
                 : "Los eventos del sistema se generan automáticamente. Aquí puedes agregar eventos personalizados."}
             </DialogDescription>
+            {editingEvent && editingEvent.created_by_name && (
+              <div className="flex items-center gap-2 mt-2 p-3 bg-blue-50 rounded-md border border-blue-200">
+                <User className="h-4 w-4 text-blue-600" />
+                <span className="text-sm text-blue-800">
+                  <strong>Creado por:</strong> {editingEvent.created_by_name}
+                  {editingEvent.created_by_email && ` (${editingEvent.created_by_email})`}
+                </span>
+              </div>
+            )}
+            {editingEvent && editingEvent.sow_ear_tag && (
+              <div className="flex items-center gap-2 mt-2 p-3 bg-green-50 rounded-md border border-green-200">
+                <span className="text-2xl">🐷</span>
+                <div className="text-sm text-green-800">
+                  <strong>Cerda:</strong> {editingEvent.sow_ear_tag}
+                  {editingEvent.sow_alias && ` - ${editingEvent.sow_alias}`}
+                  {editingEvent.sow_breed && ` (${editingEvent.sow_breed})`}
+                </div>
+              </div>
+            )}
           </DialogHeader>
           <div className="space-y-4 py-4">
             <div className="space-y-2">
@@ -721,6 +770,30 @@ export default function CalendarPage() {
                 value={eventForm.notes}
                 onChange={(e) => setEventForm({...eventForm, notes: e.target.value})}
               />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="event-sow">Cerda Asociada (Opcional)</Label>
+              <Select 
+                value={eventForm.sow_id?.toString() || ""} 
+                onValueChange={(value) => setEventForm({...eventForm, sow_id: value ? parseInt(value) : null})}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Seleccionar cerda..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="">Sin cerda asociada</SelectItem>
+                  {sows.map(sow => (
+                    <SelectItem key={sow.id} value={sow.id.toString()}>
+                      {sow.ear_tag} - {sow.alias || 'Sin alias'} ({sow.breed})
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {eventForm.sow_id && (
+                <p className="text-xs text-gray-500 mt-1">
+                  El evento estará asociado a esta cerda
+                </p>
+              )}
             </div>
           </div>
           <DialogFooter>

@@ -332,6 +332,18 @@ export const sowService = {
     return response.data.data;
   },
   
+  // Obtener lista simplificada de cerdas (para selects)
+  getSowsSimplified: async (filters = {}) => {
+    const params = new URLSearchParams();
+    Object.keys(filters).forEach(key => {
+      if (filters[key]) params.append(key, filters[key]);
+    });
+    const queryString = params.toString();
+    const url = queryString ? `/sows/simplified?${queryString}` : '/sows/simplified';
+    const response = await api.get(url);
+    return response.data.data || [];
+  },
+  
   uploadPhoto: async (file) => {
     const formData = new FormData();
     formData.append('photo', file);
