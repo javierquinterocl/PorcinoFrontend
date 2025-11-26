@@ -34,15 +34,14 @@ export function DashboardLayout({ children }) {
         <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
         
         {/* Contenido principal con scroll independiente */}
-        <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-          <main className="flex-1 bg-gray-50 overflow-y-auto">
-            <div className="w-full max-w-[1400px] mx-auto px-4 py-4 md:py-6">
+        <main className="flex-1 bg-gray-50 overflow-y-auto min-w-0">
+          <div className="min-h-full flex flex-col">
+            <div className="flex-1 w-full max-w-[1400px] mx-auto px-4 py-4 md:py-6">
               {children}
             </div>
-          </main>
-          
-          <Footer />
-        </div>
+            <Footer />
+          </div>
+        </main>
       </div>
     </div>
   );
