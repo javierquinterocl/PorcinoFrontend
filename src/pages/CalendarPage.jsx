@@ -774,14 +774,14 @@ export default function CalendarPage() {
             <div className="space-y-2">
               <Label htmlFor="event-sow">Cerda Asociada (Opcional)</Label>
               <Select 
-                value={eventForm.sow_id?.toString() || ""} 
-                onValueChange={(value) => setEventForm({...eventForm, sow_id: value ? parseInt(value) : null})}
+                value={eventForm.sow_id?.toString() || "none"} 
+                onValueChange={(value) => setEventForm({...eventForm, sow_id: value === "none" ? null : parseInt(value)})}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Seleccionar cerda..." />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">Sin cerda asociada</SelectItem>
+                  <SelectItem value="none">Sin cerda asociada</SelectItem>
                   {sows.map(sow => (
                     <SelectItem key={sow.id} value={sow.id.toString()}>
                       {sow.ear_tag} - {sow.alias || 'Sin alias'} ({sow.breed})
