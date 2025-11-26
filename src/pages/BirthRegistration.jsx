@@ -438,13 +438,13 @@ export default function BirthRegistration() {
   };
 
   return (
-    <div>
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-6">
       {isLoadingData ? (
         <div className="flex justify-center items-center h-96">
           <p className="text-lg">Cargando datos...</p>
         </div>
       ) : (
-        <>
+        <div className="pb-6">
           <div className="mb-6">
             <Button
               variant="ghost"
@@ -1020,7 +1020,7 @@ export default function BirthRegistration() {
               </Button>
             </div>
           </form>
-        </>
+        </div>
       )}
     </div>
   );

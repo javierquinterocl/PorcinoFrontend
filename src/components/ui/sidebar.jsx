@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react"
-import { useLocation, Link } from "react-router-dom"
+import { useLocation, Link, useNavigate } from "react-router-dom"
 import {
   BarChart3,
   Calendar,
@@ -25,6 +25,7 @@ import {
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
+import { useAuth } from "@/context/AuthContext"
 
 function NavItem({ icon, label, href, isActive, collapsed, onNavigate }) {
   return (
@@ -212,6 +213,8 @@ function SidebarContent({ pathname, collapsed, openMenus, toggleMenu, handleNavi
 export function Sidebar({ isOpen = false, onClose }) {
   const location = useLocation();
   const pathname = location.pathname;
+  const navigate = useNavigate();
+  const { logout } = useAuth();
   const [openMenus, setOpenMenus] = useState({
     inventory: false,
     sows: false,
@@ -352,12 +355,13 @@ export function Sidebar({ isOpen = false, onClose }) {
             <Button
               variant="ghost"
               className="w-full justify-start text-white hover:bg-[#2a4a04] hover:text-white"
-              asChild
+              onClick={() => {
+                handleLogout();
+                handleNavigate();
+              }}
             >
-              <Link to="/login" onClick={handleNavigate}>
-                <LogOut className="h-5 w-5 mr-2" />
-                <span>Cerrar Sesión</span>
-              </Link>
+              <LogOut className="h-5 w-5 mr-2" />
+              <span>Cerrar Sesión</span>
             </Button>
           </div>
         </div>

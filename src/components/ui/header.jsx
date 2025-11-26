@@ -1,7 +1,6 @@
-import { Bell, HelpCircle, Menu, Moon, Search, Settings, Sun, User, LogOut, Check, Trash2, Calendar, AlertCircle, RefreshCw } from "lucide-react"
+import { Bell, Menu, User, LogOut, Check, Trash2, Calendar, AlertCircle, RefreshCw } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useState, useEffect } from "react"
-import { useTheme } from "@/components/ui/theme-provider"
+import { useState } from "react"
 import { useAuth } from "@/context/AuthContext"
 import { useNotifications } from "@/context/NotificationContext"
 import {
@@ -18,17 +17,10 @@ import { Input } from "@/components/ui/input"
 import { Link, useNavigate } from "react-router-dom"
 
 export function Header({ toggleSidebar }) {
-  const { setTheme, theme } = useTheme()
   const { logout, user } = useAuth()
   const { notifications, unreadCount, markAsRead, markAllAsRead, deleteNotification, refresh, isLoading, lastUpdate } = useNotifications()
-  const [mounted, setMounted] = useState(false)
   const [isRefreshing, setIsRefreshing] = useState(false)
   const navigate = useNavigate()
-
-  // Evitar problemas de hidratación
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   // Función para calcular tiempo transcurrido
   const getTimeAgo = (dateString) => {
@@ -173,15 +165,6 @@ export function Header({ toggleSidebar }) {
         </div>
 
         <div className="hidden md:flex items-center gap-4">
-          <div className="relative">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-black/70" />
-            <Input
-              type="search"
-              placeholder="Buscar..."
-              className="pl-8 w-[200px] bg-[#ffffff] border-[#5a6a3a] text-gray-500 placeholder:text-black/70 "
-            />
-          </div>
-
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon" className="relative text-white hover:bg-[#5a6a3a] hover:text-white">
@@ -315,26 +298,6 @@ export function Header({ toggleSidebar }) {
               )}
             </DropdownMenuContent>
           </DropdownMenu>
-
-          <Button variant="ghost" size="icon" className="text-white hover:bg-[#5a6a3a] hover:text-white">
-            <HelpCircle className="h-5 w-5" />
-            <span className="sr-only">Ayuda</span>
-          </Button>
-
-          <Button
-            variant="ghost"
-            size="icon"
-            className="text-white hover:bg-[#5a6a3a] hover:text-white"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          >
-            {mounted && theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-            <span className="sr-only">Cambiar tema</span>
-          </Button>
-
-          <Button variant="ghost" size="icon" className="text-white hover:bg-[#5a6a3a] hover:text-white">
-            <Settings className="h-5 w-5" />
-            <span className="sr-only">Configuración</span>
-          </Button>
         </div>
 
         <DropdownMenu>
