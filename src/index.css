@@ -122,3 +122,16 @@
     color: hsl(var(--foreground));
   }
 }
+
+/* Force app to use single scrolling container (main) and hide document scrollbar */
+html, body, #root {
+  height: 100%;
+}
+
+html, body {
+  overflow: hidden; /* hide the page-level scrollbar so `main` controls scrolling */
+}
+
+main {
+  overflow-y: auto; /* ensure main remains scrollable */
+}
