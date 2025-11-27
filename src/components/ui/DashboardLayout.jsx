@@ -26,22 +26,22 @@ export function DashboardLayout({ children }) {
   };
 
   return (
-    <div className="h-screen flex flex-col overflow-hidden">
+    <div className="h-screen grid grid-rows-[auto_1fr] overflow-hidden">
       <Header toggleSidebar={toggleSidebar} />
       
-      <div className="flex-1 flex min-h-0 overflow-hidden">
+      <div className="grid md:grid-cols-[auto_1fr] overflow-hidden">
         {/* Sidebar - ahora maneja su propia visibilidad */}
         <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
         
-        {/* Contenido principal con scroll independiente */}
-        <main className="flex-1 bg-gray-50 overflow-y-auto min-w-0">
-          <div className="min-h-full flex flex-col">
-            <div className="flex-1 w-full max-w-[1400px] mx-auto px-4 py-4 md:py-6">
+        {/* Contenido principal con scroll */}
+        <div className="grid grid-rows-[1fr_auto] overflow-hidden">
+          <main className="overflow-y-auto bg-gray-50">
+            <div className="w-full max-w-[1400px] mx-auto px-4 py-4 md:py-6">
               {children}
             </div>
-            <Footer />
-          </div>
-        </main>
+          </main>
+          <Footer />
+        </div>
       </div>
     </div>
   );

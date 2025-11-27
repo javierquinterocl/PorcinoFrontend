@@ -180,12 +180,13 @@ export default function ReproductiveList() {
     setViewDialog({ open: true, sow: boar, type: 'verraco' });
   };
 
-  const handleEditSow = (sow) => {
-    // Validar que la cerda no esté descartada
-    if (sow.status === 'descartada') {
+   const handleEditSow = (sow) => {
+    // Validar que el ID sea válido
+    if (!sow || !sow.id || isNaN(parseInt(sow.id))) {
+      console.error('❌ ID inválido en handleEditSow:', sow?.id);
       toast({
-        title: "Operación no permitida",
-        description: "No se puede editar una cerda descartada. El descarte es un estado final.",
+        title: "Error",
+        description: `ID de cerda inválido: "${sow?.id}". No se puede editar.`,
         variant: "destructive"
       });
       return;
