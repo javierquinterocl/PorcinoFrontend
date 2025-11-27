@@ -683,6 +683,11 @@ export default function PregnanciesList() {
               )}
             </div>
           )}
+          <DialogFooter>
+            <Button onClick={() => setViewDialog({ open: false, pregnancy: null })}>
+              Cerrar
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
 

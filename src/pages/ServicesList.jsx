@@ -164,18 +164,23 @@ const ServicesList = () => {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold">Servicios Reproductivos</h1>
-          <p className="text-muted-foreground">
-            Gestión de montas naturales e inseminaciones artificiales
-          </p>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+        <div className="flex items-center gap-3">
+          <CheckCircle className="h-8 w-8 text-green-600" />
+          <div>
+            <h1 className="text-2xl sm:text-3xl font-bold">Servicios Reproductivos</h1>
+            <p className="text-muted-foreground text-sm sm:text-base">Gestión de montas naturales e inseminaciones artificiales</p>
+          </div>
         </div>
-        <Button onClick={() => navigate('/services/register')}>
-          <Plus className="w-4 h-4 mr-2" />
-          Nuevo Servicio
+        <Button 
+          onClick={() => navigate('/services/register')}
+          className="bg-green-600 hover:bg-green-700 w-full sm:w-auto"
+        >
+          <Plus className="mr-2 h-4 w-4" />
+          <span className="hidden sm:inline">Registrar Servicio</span>
+          <span className="sm:hidden">Nuevo</span>
         </Button>
       </div>
 
