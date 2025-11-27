@@ -82,6 +82,12 @@ export default function CalendarPage() {
           });
           displayTitle = `${timeStr} - ${event.title}`;
         }
+
+         // Si tiene cerda asociada, agregarla al título
+        if (event.sow_ear_tag || event.sow_alias) {
+          const sowName = event.sow_alias || event.sow_ear_tag;
+          displayTitle = `${displayTitle} (${sowName})`;
+        }
         
         calculatedEvents.push({
           id: `custom-${event.id}`,
