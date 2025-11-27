@@ -66,7 +66,7 @@ export default function SowRegistration() {
   const [errors, setErrors] = useState({});
 
   // Cargar datos de la cerda si estamos en modo edición
- useEffect(() => {
+useEffect(() => {
     if (id) {
       // Validar que el ID sea un número antes de cargar
       if (isNaN(parseInt(id))) {

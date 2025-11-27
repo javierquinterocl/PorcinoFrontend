@@ -183,7 +183,7 @@ export default function ReproductiveList() {
    const handleEditSow = (sow) => {
     // Validar que el ID sea válido
     if (!sow || !sow.id || isNaN(parseInt(sow.id))) {
-      console.error('❌ ID inválido en handleEditSow:', sow?.id);
+      console.error('❌ ID inválido en este handleEditSow:', sow?.id);
       toast({
         title: "Error",
         description: `ID de cerda inválido: "${sow?.id}". No se puede editar.`,
