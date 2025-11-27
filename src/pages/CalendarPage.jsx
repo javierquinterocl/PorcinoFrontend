@@ -41,6 +41,14 @@ export default function CalendarPage() {
   
   // Cargar cerdas para el select
   useEffect(() => {
+    const loadSows = async () => {
+      try {
+        const sowsData = await pigService.getAllSows({ status: 'activa' });
+        setSows(sowsData || []);
+      } catch (error) {
+        console.error('Error cargando cerdas:', error);
+      }
+    };
     loadSows();
   }, []);
 
