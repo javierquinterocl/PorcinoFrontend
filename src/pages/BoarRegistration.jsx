@@ -414,8 +414,8 @@ export default function BoarRegistration() {
               <form onSubmit={handleSubmit} className="space-y-8">
               {/* Sección 1: Tipo de Verraco */}
               <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-200">
-                  🔍 Tipo de Verraco
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-200">
+                  Tipo de Verraco
                 </h3>
                 <div className="grid md:grid-cols-1 gap-6">
                   <div>
@@ -447,7 +447,7 @@ export default function BoarRegistration() {
               {/* Sección 2: Identificación */}
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-200">
-                  📋 Datos de Identificación
+                  Datos de Identificación
                 </h3>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   <div>
@@ -502,7 +502,7 @@ export default function BoarRegistration() {
               {/* Sección 3: Genética */}
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-200">
-                  🧬 Información Genética
+                  Información Genética
                 </h3>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   <div>
@@ -583,7 +583,7 @@ export default function BoarRegistration() {
                 <>
                   <div>
                     <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-green-200">
-                      📅 Fechas y Ubicación
+                      Fechas y Ubicación
                     </h3>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                       <div>
@@ -681,8 +681,8 @@ export default function BoarRegistration() {
 
                   <div>
                     <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-green-200">
-                      ⚖️ Datos Físicos
-                    </h3>
+                        Datos Físicos
+                      </h3>
                     <div className="grid md:grid-cols-3 gap-6">
                       <div>
                         <Label htmlFor="current_weight" className="text-sm font-semibold">
@@ -707,8 +707,8 @@ export default function BoarRegistration() {
               {/* Sección 5: Datos de Semen Comprado */}
               {formData.boar_type === 'semen comprado' && (
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-purple-200">
-                    🏭 Datos del Proveedor
+                    <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-purple-200">
+                    Datos del Proveedor
                   </h3>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
@@ -744,7 +744,7 @@ export default function BoarRegistration() {
               {/* Sección 6: Observaciones */}
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-yellow-200">
-                  📝 Observaciones
+                  Observaciones
                 </h3>
                 <div>
                   <Label htmlFor="notes" className="text-sm font-semibold">
@@ -763,7 +763,7 @@ export default function BoarRegistration() {
               {/* Sección 7: Foto */}
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-200">
-                  📸 Foto del Verraco
+                  Foto del Verraco
                 </h3>
                 <div className="space-y-4">
                   <div className="flex flex-col items-center">

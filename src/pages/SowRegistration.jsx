@@ -66,11 +66,11 @@ export default function SowRegistration() {
   const [errors, setErrors] = useState({});
 
   // Cargar datos de la cerda si estamos en modo edición
-useEffect(() => {
+  useEffect(() => {
     if (id) {
       // Validar que el ID sea un número antes de cargar
       if (isNaN(parseInt(id))) {
-        console.error('❌ ID inválido en SowRegistration:', id);
+        console.error('ID inválido en SowRegistration:', id);
         toast({
           title: "Error",
           description: `ID inválido: "${id}". El ID debe ser un número.`,
@@ -497,7 +497,7 @@ useEffect(() => {
               {/* Sección 1: Identificación */}
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-pink-200">
-                  📋 Datos de Identificación
+                  Datos de Identificación
                 </h3>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   <div>
@@ -551,7 +551,7 @@ useEffect(() => {
               {/* Sección 2: Genética */}
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-pink-200">
-                  🧬 Información Genética
+                  Información Genética
                 </h3>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   <div>
@@ -630,7 +630,7 @@ useEffect(() => {
               {/* Sección 3: Fechas y Ubicación */}
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-pink-200">
-                  📅 Fechas y Ubicación
+                  Fechas y Ubicación
                 </h3>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   <div>
@@ -729,7 +729,7 @@ useEffect(() => {
               {/* Sección 4: Datos Físicos */}
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-pink-200">
-                  ⚖️ Datos Físicos
+                  Datos Físicos
                 </h3>
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                   <div>
@@ -799,7 +799,7 @@ useEffect(() => {
               {/* Sección 5: Datos Reproductivos */}
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-pink-200">
-                  🐷 Datos Reproductivos <span className="text-sm text-gray-500 font-normal">(Todos opcionales)</span>
+                  Datos Reproductivos <span className="text-sm text-gray-500 font-normal">(Todos opcionales)</span>
                 </h3>
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                   <div>
@@ -961,7 +961,7 @@ useEffect(() => {
               {/* Sección 6: Foto */}
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-pink-200">
-                  📸 Foto de la Cerda
+                  Foto de la Cerda
                 </h3>
                 <div className="space-y-4">
                   <div className="flex flex-col items-center">

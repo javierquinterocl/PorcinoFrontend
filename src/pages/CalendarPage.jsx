@@ -241,7 +241,7 @@ export default function CalendarPage() {
     
     // Días vacíos antes del primer día del mes
     for (let i = 0; i < firstDay; i++) {
-      days.push(<div key={`empty-${i}`} className="min-h-[100px] p-2 border border-gray-100"></div>);
+      days.push(<div key={`empty-${i}`} className="min-h-[80px] sm:min-h-[100px] p-2 border border-gray-100"></div>);
     }
     
     // Días del mes
@@ -285,7 +285,7 @@ export default function CalendarPage() {
         <div
           key={day}
           className={cn(
-            "min-h-[100px] p-2 border cursor-pointer relative transition-colors",
+            "min-h-[80px] sm:min-h-[100px] p-2 border cursor-pointer relative transition-colors",
             dayBgColor,
             dayBorderColor,
             !dayBgColor && "hover:bg-gray-50"
@@ -293,7 +293,7 @@ export default function CalendarPage() {
           onClick={() => handleDayClick(day)}
         >
           <div className={cn(
-            "inline-flex items-center justify-center w-7 h-7 rounded-full mb-1 font-semibold",
+            "inline-flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 rounded-full mb-1 font-semibold text-sm sm:text-base",
             isToday && "bg-red-500 text-white",
             !isToday && dayEvents.length > 0 && "font-bold"
           )}>
@@ -305,7 +305,7 @@ export default function CalendarPage() {
               <div
                 key={event.id}
                 className={cn(
-                  "text-xs px-2 py-1 rounded truncate flex items-center justify-between group",
+                  "text-[11px] sm:text-xs px-2 py-1 rounded truncate flex items-center justify-between group",
                   event.type === 'farrowing' && "bg-red-100 text-red-800 border border-red-200",
                   event.type === 'heat' && "bg-pink-100 text-pink-800 border border-pink-200",
                   event.type === 'reminder' && "bg-orange-100 text-orange-800 border border-orange-200",
@@ -591,8 +591,10 @@ export default function CalendarPage() {
             </div>
             
             {/* Calendar days */}
-            <div className="grid grid-cols-7 gap-0 border-t border-l border-gray-200">
-              {renderCalendar()}
+            <div className="overflow-x-auto">
+              <div className="min-w-[640px] grid grid-cols-7 gap-0 border-t border-l border-gray-200">
+                {renderCalendar()}
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -638,7 +640,7 @@ export default function CalendarPage() {
 
       {/* Dialog de confirmación de eliminación */}
       <Dialog open={deleteDialog.open} onOpenChange={(open) => setDeleteDialog({ open, eventId: null })}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="mx-4 sm:mx-auto sm:max-w-md w-full max-h-[80vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-red-600">
               <Calendar className="h-5 w-5" />
@@ -668,7 +670,7 @@ export default function CalendarPage() {
 
       {/* Dialog for new event */}
       <Dialog open={isEventDialogOpen} onOpenChange={setIsEventDialogOpen}>
-        <DialogContent>
+        <DialogContent className="mx-4 sm:mx-auto w-full max-w-lg sm:max-w-xl md:max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>{editingEvent ? "Editar Evento" : "Agregar Evento Personalizado"}</DialogTitle>
             <DialogDescription>
@@ -714,7 +716,7 @@ export default function CalendarPage() {
                 value={eventForm.event_type} 
                 onValueChange={(value) => setEventForm({...eventForm, event_type: value})}
               >
-                <SelectTrigger>
+                <SelectTrigger className="w-full">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -751,7 +753,7 @@ export default function CalendarPage() {
                 value={eventForm.sow_id ? eventForm.sow_id.toString() : "none"} 
                 onValueChange={(value) => setEventForm({...eventForm, sow_id: value === "none" ? null : parseInt(value)})}
               >
-                <SelectTrigger>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Sin cerda asociada" />
                 </SelectTrigger>
                 <SelectContent>
@@ -765,11 +767,11 @@ export default function CalendarPage() {
               </Select>
             </div>
           </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setIsEventDialogOpen(false)}>
+          <DialogFooter className="flex flex-col sm:flex-row gap-2">
+            <Button variant="outline" onClick={() => setIsEventDialogOpen(false)} className="w-full sm:w-auto">
               Cancelar
             </Button>
-            <Button className="bg-red-600 hover:bg-red-700" onClick={handleSaveEvent}>
+            <Button className="w-full sm:w-auto bg-red-600 hover:bg-red-700" onClick={handleSaveEvent}>
               {editingEvent ? "Actualizar Evento" : "Guardar Evento"}
             </Button>
           </DialogFooter>
